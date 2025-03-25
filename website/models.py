@@ -42,9 +42,12 @@ class Product(db.Model):
 
     carts = db.relationship('Cart', backref=db.backref('product', lazy=True))
     orders = db.relationship('Order', backref=db.backref('product', lazy=True))
+    # Foreign Key to Category (nullable=False means every product must have a category)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
 
     def __str__(self):
         return '<Product %r>' % self.product_name
+
 
 
 class Cart(db.Model):
@@ -66,6 +69,7 @@ class Order(db.Model):
     price = db.Column(db.Float, nullable=False)
     status = db.Column(db.String(100), nullable=False)
     payment_id = db.Column(db.String(1000), nullable=True)
+    delivery_address = db.Column(db.String(500), nullable=False)
 
 
     customer_link = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
@@ -75,3 +79,17 @@ class Order(db.Model):
 
     def __str__(self):
         return '<Order %r>' % self.id
+    
+
+
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False, unique=True)
+    description = db.Column(db.Text, nullable=True)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # For relationships (optional, if products belong to categories)
+    products = db.relationship('Product', backref='category', lazy=True)
+
+    def __str__(self):
+        return '<Category %r>' % self.name

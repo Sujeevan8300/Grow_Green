@@ -70,7 +70,17 @@
 
                     </ul>
 
-                    <div class="d-grid"><a href="/place-order" class="btn btn-primary">Place Order</a></div>
+                    <!-- Delivery Address Form -->
+                    <div class="d-grid">
+                        <form action="/place-order" method="POST">
+                            <div class="mb-3">
+                                <label for="delivery_address" class="form-label">Delivery Address</label>
+                                <textarea class="form-control" id="delivery_address" name="delivery_address" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Place Order</button>
+                        </form>
+                    </div>
+                    
 
                 </div>
             </div>

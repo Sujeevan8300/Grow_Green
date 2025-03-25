@@ -43,3 +43,15 @@
     color: orange;
     transition: 200ms;
 }
+
+
+footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: orange;
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}

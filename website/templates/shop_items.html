@@ -2,58 +2,62 @@
 
 {% block title %} Shop Items {% endblock %}
 
-
 {% block body %}
 
+<!-- Heading -->
+<h2 class="text-white bg-dark p-2 text-center rounded">
+    Shop Items 
+    <a href="/admin-page" class="btn btn-primary btn-sm float-end">Go Back</a>
+</h2>
+
+
+<!-- Check if there are no shop items -->
 {% if items | length < 1 %}
-<h3 style="color: white;">No Shop Items </h3>
+    <h3 style="color: white;">No Shop Items Available</h3>
 
 {% else %}
+    <!-- Table for displaying shop items -->
+    <div class="table-responsive">
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Date Added</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Previous Price</th>
+                    <th scope="col">Current Price</th>
+                    <th scope="col">In Stock</th>
+                    <th scope="col">Category</th>  <!-- New column for Category -->
+                    <th scope="col">Product Picture</th>
+                    <th scope="col">Flash Sale</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
 
-<table class="table table-dark table-hover">
-    <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Date Added</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Previous Price</th>
-            <th scope="col">Current Price</th>
-            <th scope="col">In Stock</th>
-            <th scope="col">Product Picture</th>
-            <th scope="col">Flash Sale</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <th scope="row">{{ item.id }}</th>
+                        <td>{{ item.date_added }}</td>
+                        <td>{{ item.product_name }}</td>
+                        <td>{{ item.previous_price }}</td>
+                        <td>{{ item.current_price }}</td>
+                        <td>{{ item.in_stock }}</td>
+                        <td>{{ item.category.name if item.category else 'N/A' }}</td> <!-- Display category name -->
+                        <td><img src="{{ item.product_picture }}" alt="Product Image" style="height: 50px; width: 50px; border-radius: 2px;"></td>
+                        <td>{{ item.flash_sale }}</td>
 
-    <tbody>
-        {% for item in items %}
-
-        <tr>
-            <th scope="row">{{ item.id }}</th>
-            <td>{{ item.date_added }}</td>
-            <td>{{ item.product_name }}</td>
-            <td>{{ item.previous_price }}</td>
-            <td>{{ item.current_price }}</td>
-            <td>{{ item.in_stock }}</td>
-            <td><img src="{{ item.product_picture }}" alt="" style="height: 50px; width: 50px; border-radius: 2px;"></td>
-            <td>{{ item.flash_sale }}</td>
-
-
-            <td>
-                <a href="/update-item/{{ item.id }}">Update</a>
-                <br>
-                <a href="/delete-item/{{ item.id }}">Delete</a>
-            </td>
-
-        </tr>
-
-
-        {% endfor %}
-    </tbody>
-</table>
-
+                        <td>
+                            <a href="/update-item/{{ item.id }}" class="btn btn-warning btn-sm">Update</a>
+                            <br>
+                            <a href="/delete-item/{{ item.id }}" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endif %}
-
 
 {% endblock %}

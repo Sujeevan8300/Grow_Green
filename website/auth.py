@@ -51,7 +51,7 @@ def login():
 
         if customer:
             if customer.verify_password(password=password):
-                login_user(customer)
+                login_user(customer)  # Notify Flask-Login of login
                 return redirect('/')
             else:
                 flash('Incorrect Email or Password')

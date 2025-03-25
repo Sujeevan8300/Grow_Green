@@ -3,7 +3,7 @@
     box-sizing: border-box;
 }
 body{
-    background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('../images/background.jpg');
+    background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('../images/crop_rec.png');
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
@@ -27,6 +27,7 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: 4px 4px 0px 0px rgb(58, 190, 91);
 
 }
 .base .base-content .form h3{

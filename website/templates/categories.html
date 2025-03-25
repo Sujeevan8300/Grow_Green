@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %} Manage Categories {% endblock %}
+
+{% block body %}
+    <h2 class="text-white bg-dark p-2 text-center rounded">
+        Manage Categories  
+        <a href="/admin-page" class="btn btn-primary btn-sm float-end">Go Back</a>
+    </h2>
+
+    <div class="container">
+        <div class="row">
+            <!-- Left Section: Input Form -->
+            <div class="col-md-4">
+                <div class="p-3 mb-3" style="background-color: #212529; color: #fff; border-radius: 8px;">
+                    <h3>Add Category</h3>
+                    <form action="" method="POST">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            {{ form.name.label }}<br>
+                            {{ form.name(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.description.label }}<br>
+                            {{ form.description(class="form-control", rows=4) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.submit(class="btn btn-primary w-100") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Section: Categories Table -->
+            <div class="col-md-8">
+                <h3 style="background-color: #212529; color: #fff; border-radius: 8px; height: 50px; align-content: center; text-align: center;">Existing Categories</h3>
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Category Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date Added</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                        <tr>
+                            <td>{{ category.name }}</td>
+                            <td>{{ category.description }}</td>
+                            <td>{{ category.date_added }}</td>
+                            <td>
+                                <a href="/update-category/{{ category.id }}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="/delete-category/{{ category.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

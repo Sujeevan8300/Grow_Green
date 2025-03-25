@@ -1,41 +1,77 @@
 {% extends 'base.html' %}
 
-{% block title %} Add Shop Items {% endblock %}
-
+{% block title %} Update Product {% endblock %}
 
 {% block body %}
+<div class="container min-vh-100 d-flex flex-column">
+    <h3 class="text-white bg-dark p-2 text-center rounded">
+        Update Product 
+        <a href="/shop-items" class="btn btn-primary btn-sm float-end">Go Back</a>
+    </h3>
 
-<table class="table table-dark table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Product Name</th>
-            <th scope="col">Previous Price</th>
-            <th scope="col">Current Price</th>
-            <th scope="col">In Stock</th>
-            <th scope="col">Picture</th>
-            <th scope="col">Flash Sale</th>
-            <th scope="col">Add</th>
-
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-            <form action="" method="POST", enctype="multipart/form-data">
-                
+    <div class="card bg-dark text-white shadow-lg mt-3 mx-auto" style="border-radius: 12px; width: 50%;">
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
 
-                <td>{{ form.product_name }}</td>
-                <td>{{ form.previous_price }}</td>
-                <td>{{ form.current_price }}</td>
-                <td>{{ form.in_stock }}</td>
-                <td>{{ form.product_picture() }}</td>
-                <td>{{ form.flash_sale }}</td>
-                <td>{{ form.update_product() }}</td>
+                <div class="form-group">
+                    <label for="product_name">Product Name</label>
+                    {{ form.product_name(class="form-control bg-secondary text-white", id="product_name", autocomplete="off") }}
+                    {% if form.product_name.errors %}
+                        <small class="text-danger">{{ form.product_name.errors[0] }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="previous_price">Previous Price</label>
+                    {{ form.previous_price(class="form-control bg-secondary text-white", id="previous_price", type="number", step="0.01") }}
+                    {% if form.previous_price.errors %}
+                        <small class="text-danger">{{ form.previous_price.errors[0] }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="current_price">Current Price</label>
+                    {{ form.current_price(class="form-control bg-secondary text-white", id="current_price", type="number", step="0.01") }}
+                    {% if form.current_price.errors %}
+                        <small class="text-danger">{{ form.current_price.errors[0] }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="in_stock">In Stock</label>
+                    {{ form.in_stock(class="form-control bg-secondary text-white", id="in_stock", type="number") }}
+                    {% if form.in_stock.errors %}
+                        <small class="text-danger">{{ form.in_stock.errors[0] }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="product_picture">Product Picture</label>
+                    {{ form.product_picture(class="form-control-file text-white", id="product_picture") }}
+                    {% if form.product_picture.errors %}
+                        <small class="text-danger">{{ form.product_picture.errors[0] }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="form-group form-check mt-2">
+                    {{ form.flash_sale(class="form-check-input", id="flash_sale") }}
+                    <label class="form-check-label" for="flash_sale">Flash Sale</label>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="category_id">Category</label>
+                    {{ form.category_id(class="form-control bg-secondary text-white", id="category_id") }}
+                    {% if form.category_id.errors %}
+                        <small class="text-danger">{{ form.category_id.errors[0] }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="form-group text-center mt-3">
+                    <button type="submit" class="btn btn-primary">Update Product</button>
+                </div>
             </form>
-        </tr>
-    </tbody>
-</table>
-
-
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ category.name }} {% endblock %}
+
+{% block body %}
+<div class="d-flex flex-column min-vh-100">
+    <div class="container text-center">
+        <h2 class="text-white bg-dark p-3 rounded shadow">{{ category.name }}</h2>
+                        
+        <div class="row" style="margin: 8px; background-color: rgb(219, 218, 218);" id="column">
+            {% for product in products %}
+            <div class="col" style="background-color: white;">
+                
+                <img src="{{ url_for('admin.get_image', filename=product.product_picture.split('/')[-1]) }}" alt="" style="height: 202px; width: 180px; border-radius: 10px;">
+
+                <div class="row" style="margin-top: 5px;">
+                    <h6 style="color: gray;">{{ product.product_name }}</h6>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col">
+                        <h5 style="font-weight: 600;">Rs. {{ product.current_price }}</h5>
+                        <strike><p style="color: gray;">Rs. {{ product.previous_price }}</p></strike>
+                    </div>
+                    <div class="col">
+                        <a href="/add-to-cart/{{ product.id }}">Add</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <p>{{ product.in_stock }} Items Left</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
